@@ -14,6 +14,7 @@ const postFields = [
   "tags",
   "post_tags.tags_id.slug",
   "post_tags.tags_id.name",
+  "post_tags.tags_id.id",
   "category_id.slug",
   "category_id.name",
   "category_id.site_id",
@@ -54,8 +55,9 @@ const extractTags = (post: DirectusPost): { tags: string[]; tagDetails: TagInfo[
       if (!data || typeof data === "number") return
       const slug = data.slug || data.name
       const name = data.name || data.slug
+      const id = data.id
       if (slug) {
-        tagDetails.push({ slug, name: name || slug })
+        tagDetails.push({ slug, name: name || slug, id })
       }
     })
   }
@@ -158,6 +160,36 @@ const getPostsFromCMS = async (
   return posts.map((post) => mapPostToBlogPost(post, translationMap.get(post.id), locale))
 }
 
+const collectTagIds = (post: DirectusPost): number[] => {
+  const ids = new Set<number>()
+  post.post_tags?.forEach((relation) => {
+    if (relation && typeof relation !== "number" && relation.tags_id && typeof relation.tags_id !== "number") {
+      const id = relation.tags_id.id
+      if (typeof id === "number") ids.add(id)
+    }
+  })
+  return Array.from(ids)
+}
+
+const applyTagTranslations = (tagDetails: TagInfo[] = [], translatedTags: Tag[]) => {
+  if (!translatedTags.length) return tagDetails
+  const byId = new Map<number, Tag>()
+  const bySlug = new Map<string, Tag>()
+
+  translatedTags.forEach((tag) => {
+    byId.set(tag.id, tag)
+    if (tag.slug) bySlug.set(tag.slug, tag)
+  })
+
+  return tagDetails.map((tag) => {
+    const translated =
+      (tag.id ? byId.get(tag.id) : undefined) ||
+      (tag.slug ? bySlug.get(tag.slug) : undefined)
+    if (!translated) return tag
+    return { ...tag, name: translated.name || tag.name }
+  })
+}
+
 export const getAllPostsFromCMS = async (
   locale: Locale = "zh",
   siteId: number = SITE_ID
@@ -190,7 +222,12 @@ export const getPostBySlugFromCMS = async (
   if (!post) return null
 
   const translations = await fetchTranslations([post.id], locale)
-  return mapPostToBlogPost(post, translations.get(post.id), locale)
+  const mapped = mapPostToBlogPost(post, translations.get(post.id), locale)
+  const tagIds = collectTagIds(post)
+  const translatedTags = tagIds.length ? await getTagsByIdsFromCMS(tagIds, locale) : []
+  const tagDetails = applyTagTranslations(mapped.tagDetails, translatedTags)
+
+  return { ...mapped, tagDetails }
 }
 
 export const getCategoriesForSite = async (siteId: number = SITE_ID) =>

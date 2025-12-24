@@ -6,6 +6,7 @@ export interface FAQItem {
 }
 
 export interface TagInfo {
+  id?: number
   name: string
   slug: string
 }
