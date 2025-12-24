@@ -28,7 +28,7 @@ const readingPaths = [
     description: "如果你关注 AI 搜索趋势，想了解如何让内容在 AI 时代更容易被发现：",
     articles: [
       { title: "AI 搜索时代的 SEO：从关键词到意图理解", href: "/insights/ai-ready-1" },
-      { title: "结构化数据：让 AI 理解你的内容", href: "/insights/ai-ready-2" },
+      { title: "结构化数据：让 AI 理解你的内容", href: "/insights/ai-ready-schema" },
     ],
   },
 ]
@@ -76,4 +76,3 @@ export function InsightsReadingGuide() {
     </section>
   )
 }
-

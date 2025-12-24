@@ -1,6 +1,7 @@
 import { ArrowUpRight, Clock, Calendar, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import { allInsights } from "@/lib/insights-data"
 
 const categories = [
   { label: "SEO策略", count: 12 },
@@ -9,45 +10,8 @@ const categories = [
   { label: "案例分析", count: 10 },
 ]
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "制造业网站SEO：从0到1的关键词策略",
-    excerpt:
-      "你的潜在客户在搜索什么？如何找到那些真正能带来询盘的关键词？这篇文章分享我们在B2B制造业项目中总结的实战经验。",
-    category: "SEO策略",
-    date: "2024-12-15",
-    readTime: "8分钟阅读",
-    slug: "/blog/manufacturing-seo-keyword-strategy",
-  },
-  {
-    id: 2,
-    title: "Next.js 15 与 Core Web Vitals 优化指南",
-    excerpt: "网站加载慢不仅影响用户体验，更直接影响搜索排名。我们来聊聊如何用 Next.js 最新特性让你的网站快如闪电。",
-    category: "技术实现",
-    date: "2024-12-10",
-    readTime: "12分钟阅读",
-    slug: "/blog/nextjs-core-web-vitals",
-  },
-  {
-    id: 3,
-    title: "B2B企业官网信息架构最佳实践",
-    excerpt: "产品分类、解决方案、案例展示、技术文档...内容这么多，怎么组织才能让用户和搜索引擎都满意？",
-    category: "信息架构",
-    date: "2024-12-05",
-    readTime: "10分钟阅读",
-    slug: "/blog/b2b-website-information-architecture",
-  },
-  {
-    id: 4,
-    title: "中国市场SEO：百度与Google双轨优化",
-    excerpt: "做外贸的企业经常问：既要做百度又要做Google，策略上有什么不同？这篇文章给你一个清晰的框架。",
-    category: "SEO策略",
-    date: "2024-11-28",
-    readTime: "15分钟阅读",
-    slug: "/blog/china-seo-baidu-google",
-  },
-]
+// 首页知识分享区：简单从知识库里取前几篇文章展示
+const homepageArticles = allInsights.slice(0, 4)
 
 export function BlogSection() {
   return (
@@ -68,7 +32,7 @@ export function BlogSection() {
             </p>
           </div>
           <Link
-            href="/blog"
+            href="/insights"
             className="group flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             查看全部文章
@@ -101,7 +65,7 @@ export function BlogSection() {
 
         {/* Blog posts grid - Increased gap */}
         <div className="grid gap-8 md:grid-cols-2">
-          {blogPosts.map((post, index) => (
+          {homepageArticles.map((post, index) => (
             <BlogCard key={post.id} post={post} featured={index === 0} />
           ))}
         </div>
@@ -110,7 +74,7 @@ export function BlogSection() {
   )
 }
 
-function BlogCard({ post, featured }: { post: (typeof blogPosts)[number]; featured?: boolean }) {
+function BlogCard({ post, featured }: { post: (typeof homepageArticles)[number]; featured?: boolean }) {
   return (
     <article
       className={`group flex flex-col rounded-xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md ${
@@ -130,13 +94,13 @@ function BlogCard({ post, featured }: { post: (typeof blogPosts)[number]; featur
             </span>
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              {post.readTime}
+              {post.readTime ?? "约8分钟阅读"}
             </span>
           </div>
         </div>
 
         {/* Title */}
-        <Link href={post.slug} className="group/link">
+        <Link href={post.href} className="group/link">
           <h3
             className={`font-semibold text-foreground transition-colors group-hover/link:text-primary ${featured ? "text-xl md:text-2xl" : "text-lg"}`}
           >
@@ -144,12 +108,12 @@ function BlogCard({ post, featured }: { post: (typeof blogPosts)[number]; featur
           </h3>
         </Link>
 
-        {/* Excerpt - Better line-height */}
-        <p className="mt-4 flex-1 leading-relaxed text-muted-foreground">{post.excerpt}</p>
+        {/* 摘要文案来自知识库 summary 字段 */}
+        <p className="mt-4 flex-1 leading-relaxed text-muted-foreground">{post.summary}</p>
 
         {/* Read More - Increased top margin */}
         <Link
-          href={post.slug}
+          href={post.href}
           className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
         >
           阅读全文

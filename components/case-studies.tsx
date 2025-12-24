@@ -71,7 +71,7 @@ export function CaseStudies() {
             </p>
           </div>
           <Link
-            href="/cases"
+            href="/case"
             className="group flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             查看更多案例
