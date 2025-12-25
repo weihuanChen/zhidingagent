@@ -12,6 +12,7 @@ const navItems = [
   { href: "/ai-ready", label: "AI就绪" },
   { href: "/services", label: "服务方案" },
   { href: "/about", label: "关于" },
+  { href: "/faq", label: "常见问题" },
   { href: "/case", label: "案例" },
   { href: "/insights", label: "知识库" },
 ]
