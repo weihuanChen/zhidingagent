@@ -145,8 +145,8 @@ export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
     "@id": caseUrl,
     headline: caseItem.title,
     description: caseItem.insight || caseItem.problem || "",
-    datePublished: caseItem.date || post?.date || "",
-    dateModified: caseItem.date || post?.date || "",
+    datePublished: ("date" in caseItem ? caseItem.date : undefined) || post?.date || "",
+    dateModified: ("date" in caseItem ? caseItem.date : undefined) || post?.date || "",
     author: {
       "@type": "Organization",
       name: "知定智能",
