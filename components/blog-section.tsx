@@ -40,7 +40,8 @@ export function BlogSection() {
           </Link>
         </div>
 
-        <div className="mb-10 rounded-xl border border-border bg-card p-8">
+        {/* 按主题浏览区块 - 暂时隐藏 */}
+        {/* <div className="mb-10 rounded-xl border border-border bg-card p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
               <div className="h-2 w-2 rounded-full bg-primary" />
@@ -61,7 +62,7 @@ export function BlogSection() {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Blog posts grid - Increased gap */}
         <div className="grid gap-8 md:grid-cols-2">
