@@ -14,7 +14,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react"
+import { useState, useRef } from "react"
+import { toast } from "sonner"
 
 // Custom RadioOption component with enhanced styling
 function RadioOption({ 
@@ -41,14 +42,79 @@ function RadioOption({
 
 export function CollaborationForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
+    
+    // 表单字段引用
+    const formRef = useRef<HTMLFormElement>(null)
+    const industryRef = useRef<{ value: string }>({ value: "" })
+    const websiteStatusRef = useRef<string>("none")
+    const timeframeRef = useRef<string>("")
+    const preferredModeRef = useRef<string>("")
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        setIsSubmitting(false)
-        alert("感谢您的详细咨询。我会仔细审阅您的信息，并尽快与您联系。")
+
+        try {
+            const formData = new FormData(e.target as HTMLFormElement)
+            const formValues = {
+                name: formData.get("name") as string,
+                email: formData.get("email") as string,
+                industry: industryRef.current.value,
+                website: formData.get("website") as string || "",
+                websiteStatus: websiteStatusRef.current,
+                challenge: formData.get("challenge") as string,
+                timeframe: timeframeRef.current,
+                preferredMode: preferredModeRef.current,
+                other: formData.get("other") as string || "",
+            }
+
+            // 验证必填字段
+            if (!formValues.name || !formValues.email || !formValues.industry || 
+                !formValues.websiteStatus || !formValues.challenge || 
+                !formValues.timeframe || !formValues.preferredMode) {
+                toast.error("提交失败", {
+                    description: "请填写所有必填字段",
+                })
+                setIsSubmitting(false)
+                return
+            }
+
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formValues),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.error || "提交失败，请稍后重试")
+            }
+
+            // 显示成功提示
+            toast.success("提交成功！", {
+                description: "感谢您的详细咨询。我会仔细审阅您的信息，并尽快与您联系。",
+                duration: 5000,
+            })
+
+            // 重置表单
+            if (formRef.current) {
+                formRef.current.reset()
+                industryRef.current.value = ""
+                websiteStatusRef.current = "none"
+                timeframeRef.current = ""
+                preferredModeRef.current = ""
+            }
+        } catch (error) {
+            toast.error("提交失败", {
+                description: error instanceof Error ? error.message : "提交失败，请稍后重试",
+                duration: 5000,
+            })
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -60,23 +126,28 @@ export function CollaborationForm() {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-10">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-10">
                 {/* Basic Info */}
                 <div className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2">
                         <div className="space-y-2">
                             <Label htmlFor="name">姓名</Label>
-                            <Input id="name" required placeholder="您的姓名" className="h-11 transition-colors hover:bg-accent/30" />
+                            <Input id="name" name="name" required placeholder="您的姓名" className="h-11 transition-colors hover:bg-accent/30" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="email">工作邮箱</Label>
-                            <Input id="email" type="email" required placeholder="name@company.com" className="h-11 transition-colors hover:bg-accent/30" />
+                            <Input id="email" name="email" type="email" required placeholder="name@company.com" className="h-11 transition-colors hover:bg-accent/30" />
                         </div>
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="industry">行业 <span className="text-destructive">*</span></Label>
-                        <Select required>
+                        <Select 
+                            required
+                            onValueChange={(value) => {
+                                industryRef.current.value = value
+                            }}
+                        >
                             <SelectTrigger id="industry" className="h-11 bg-background transition-colors hover:bg-accent/30">
                                 <SelectValue placeholder="请选择您的行业" />
                             </SelectTrigger>
@@ -92,14 +163,20 @@ export function CollaborationForm() {
 
                     <div className="space-y-2">
                         <Label htmlFor="website">当前网站（如有）</Label>
-                        <Input id="website" placeholder="https://www.example.com" className="h-11 transition-colors hover:bg-accent/30" />
+                        <Input id="website" name="website" placeholder="https://www.example.com" className="h-11 transition-colors hover:bg-accent/30" />
                     </div>
                 </div>
 
                 {/* Website Status - Critical */}
                 <div className="space-y-4 rounded-lg border border-border bg-card/50 p-6">
                     <Label className="text-base font-semibold">当前网站状态 <span className="text-destructive">*</span></Label>
-                    <RadioGroup defaultValue="none" className="grid gap-3">
+                    <RadioGroup 
+                        defaultValue="none" 
+                        className="grid gap-3"
+                        onValueChange={(value) => {
+                            websiteStatusRef.current = value
+                        }}
+                    >
                         <RadioOption value="none" id="status-none">
                             还没有网站
                         </RadioOption>
@@ -120,6 +197,7 @@ export function CollaborationForm() {
                     <Label htmlFor="challenge" className="text-base font-semibold">您希望通过网站解决什么问题？ <span className="text-destructive">*</span></Label>
                     <Textarea
                         id="challenge"
+                        name="challenge"
                         required
                         className="min-h-[100px] bg-muted/30 transition-colors hover:bg-accent/20 focus:bg-background"
                         placeholder="例如：获得询盘、提升品牌曝光、减少对广告的依赖..."
@@ -129,7 +207,13 @@ export function CollaborationForm() {
                 {/* Timeframe - High Filter Value */}
                 <div className="space-y-4">
                     <Label className="text-base font-semibold">您对 SEO 效果的预期时间框架是？ <span className="text-destructive">*</span></Label>
-                    <RadioGroup className="grid gap-3">
+                    <RadioGroup 
+                        defaultValue=""
+                        className="grid gap-3"
+                        onValueChange={(value) => {
+                            timeframeRef.current = value
+                        }}
+                    >
                         <RadioOption value="3m" id="time-3m">
                             3 个月内（立即见效）
                         </RadioOption>
@@ -148,7 +232,13 @@ export function CollaborationForm() {
                 {/* Preferred Mode */}
                 <div className="space-y-4">
                     <Label className="text-base font-semibold">首选合作模式 <span className="text-destructive">*</span></Label>
-                    <RadioGroup className="grid gap-3">
+                    <RadioGroup 
+                        defaultValue=""
+                        className="grid gap-3"
+                        onValueChange={(value) => {
+                            preferredModeRef.current = value
+                        }}
+                    >
                         <RadioOption value="construction" id="mode-construction">
                             网站结构搭建与基础设施
                         </RadioOption>
@@ -169,6 +259,7 @@ export function CollaborationForm() {
                     <Label htmlFor="other">还有其他信息需要补充吗？（可选）</Label>
                     <Textarea
                         id="other"
+                        name="other"
                         className="min-h-[80px] bg-muted/30 transition-colors hover:bg-accent/20 focus:bg-background"
                         placeholder="具体约束条件、背景信息或截止日期..."
                     />
