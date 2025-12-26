@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@directus/sdk':
+    specifier: ^20.3.0
+    version: 20.3.0
   '@hookform/resolvers':
     specifier: ^3.10.0
     version: 3.10.0(react-hook-form@7.69.0)
@@ -140,6 +143,9 @@ dependencies:
   recharts:
     specifier: 2.15.4
     version: 2.15.4(react-dom@19.2.0)(react@19.2.0)
+  remark-gfm:
+    specifier: ^4.0.1
+    version: 4.0.1
   sonner:
     specifier: ^1.7.4
     version: 1.7.4(react-dom@19.2.0)(react@19.2.0)
@@ -237,6 +243,11 @@ packages:
 
   /@date-fns/tz@1.2.0:
     resolution: {integrity: sha512-LBrd7MiJZ9McsOgxqWX7AaxrDjcFVjWH/tIKJd7pnR7McaslGYOP1QmmiBXdJH/H/yLCT+rcQ7FaPBUxRGUtrg==}
+    dev: false
+
+  /@directus/sdk@20.3.0:
+    resolution: {integrity: sha512-auy59B0A7Ri+4JDy0JcdFHnsHvOkl3ixWMWYciXAbm4oYIE9S4be8xEpIwA5qhlPTOprJ6JHPWo9rEvcrLwNtA==}
+    engines: {node: '>=22'}
     dev: false
 
   /@emnapi/runtime@1.7.1:
