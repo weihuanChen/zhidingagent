@@ -62,9 +62,9 @@ export function ContactCta() {
               <h3 className="text-lg font-semibold text-primary-foreground">联系方式</h3>
 
               <div className="space-y-5">
-                <ContactItem icon={Mail} label="邮箱" value="hello@mingce.digital" href="mailto:hello@mingce.digital" />
-                <ContactItem icon={Phone} label="电话" value="+86 021-6789-0123" href="tel:+862167890123" />
-                <ContactItem icon={MessageSquare} label="微信" value="mingce_digital" />
+                <ContactItem icon={Mail} label="邮箱" value="contact@zhidingagent.com" href="mailto:contact@zhidingagent.com" />
+                {/* <ContactItem icon={Phone} label="电话" value="+86 021-6789-0123" href="tel:+862167890123" /> */}
+                <ContactItem icon={MessageSquare} label="微信" value="zhidingagent_com" />
               </div>
 
               <div className="mt-2 flex items-center gap-2">

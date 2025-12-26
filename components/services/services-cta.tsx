@@ -33,7 +33,7 @@ export function ServicesCta() {
           </div>
           <div className="flex items-center gap-2">
             <MessageCircle className="h-4 w-4" />
-            <span>微信: mingce_seo</span>
+            <span>微信: zhidingagent_com</span>
           </div>
         </div>
 
