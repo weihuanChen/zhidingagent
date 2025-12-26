@@ -11,11 +11,26 @@ import type { BlogPost } from "@/lib/types"
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: "知识库 | 知定智能 - SEO 与网站架构知识体系",
-  description:
-    "专注于决策思考、系统架构和长期增长的 SEO 知识库。涵盖 SEO 基础、网站架构、制造业与品牌 SEO，以及 AI 就绪搜索。适合企业主、营销负责人和品牌团队。",
-  keywords: "SEO 知识库, 网站架构, SEO 策略, 制造业 SEO, 品牌 SEO, AI 搜索, SEO 基础",
+export async function generateMetadata(): Promise<Metadata> {
+  const { getPostsByCategoryFromCMS } = await import("@/lib/cms-blog")
+  const { SITE_ID } = await import("@/lib/directus")
+  const insightsPosts = await getPostsByCategoryFromCMS("insights", "zh", SITE_ID)
+  const publishedCount = insightsPosts.length
+
+  // insights 分类下已发布文章数 <=3 时设置 noindex
+  const shouldNoIndex = publishedCount <= 3
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zhidingagent.com"
+
+  return {
+    title: "知识库 | 知定智能 - SEO 与网站架构知识体系",
+    description:
+      "专注于决策思考、系统架构和长期增长的 SEO 知识库。涵盖 SEO 基础、网站架构、制造业与品牌 SEO，以及 AI 就绪搜索。适合企业主、营销负责人和品牌团队。",
+    keywords: "SEO 知识库, 网站架构, SEO 策略, 制造业 SEO, 品牌 SEO, AI 搜索, SEO 基础",
+    robots: shouldNoIndex ? "noindex,follow" : "index,follow",
+    alternates: {
+      canonical: `${baseUrl}/insights`,
+    },
+  }
 }
 
 export default async function InsightsPage() {

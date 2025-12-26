@@ -5,17 +5,17 @@ const footerLinks = {
   services: {
     title: "服务",
     links: [
-      { label: "SEO优化", href: "/services/seo" },
-      { label: "网站建设", href: "/services/web-development" },
-      { label: "信息架构", href: "/services/information-architecture" },
-      { label: "内容策略", href: "/services/content-strategy" },
+      { label: "SEO优化", href: "/services" },
+      { label: "网站建设", href: "/services" },
+      { label: "信息架构", href: "/services" },
+      { label: "内容策略", href: "/services" },
     ],
   },
   resources: {
     title: "资源",
     links: [
-      { label: "知识库", href: "/blog" },
-      { label: "案例研究", href: "/cases" },
+      { label: "知识库", href: "/insights" },
+      { label: "案例研究", href: "/case" },
       { label: "SEO检测工具", href: "/tools" },
       { label: "常见问题", href: "/faq" },
     ],
@@ -24,7 +24,7 @@ const footerLinks = {
     title: "关于",
     links: [
       { label: "关于我们", href: "/about" },
-      { label: "联系方式", href: "#contact" },
+      { label: "联系方式", href: "/contact" },
       { label: "隐私政策", href: "/privacy" },
       { label: "服务条款", href: "/terms" },
     ],
@@ -68,7 +68,7 @@ export function Footer() {
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"

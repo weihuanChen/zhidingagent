@@ -13,59 +13,37 @@ export function AboutHero() {
           <span className="text-foreground">关于</span>
         </nav>
 
-        <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
-          {/* Left: Main positioning */}
-          <div className="lg:col-span-3">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="h-px flex-1 bg-border" />
-              <span className="font-mono text-xs tracking-wider text-muted-foreground">ABOUT</span>
-            </div>
-
-            <h1 className="mb-8 text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
-              我帮企业建立
-              <br />
-              <span className="text-primary">能被找到的网站</span>
-            </h1>
-
-            <p className="mb-6 max-w-xl text-lg leading-loose text-muted-foreground">
-              不是设计师，不是程序员，而是一个专注于搜索架构的系统思考者。
-              我的工作是确保你的网站从第一天起就具备被搜索引擎理解、被目标客户发现的结构基础。
-            </p>
-
-            <p className="max-w-xl leading-relaxed text-muted-foreground">
-              过去几年，我为制造业和品牌客户构建了数十个以SEO为核心的网站。
-              这些经验让我形成了一套清晰的方法论：网站不是一次性项目，而是需要持续积累的数字资产。
-            </p>
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <span className="font-mono text-xs tracking-wider text-muted-foreground">ABOUT</span>
           </div>
 
-          {/* Right: Key beliefs */}
-          <div className="lg:col-span-2">
-            <div className="rounded-lg border border-border bg-card p-6">
-              <h2 className="mb-6 text-sm font-medium uppercase tracking-wider text-muted-foreground">核心信念</h2>
+          <h1 className="mb-12 text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+            关于我们
+          </h1>
 
-              <div className="space-y-6">
-                <div className="border-l-2 border-primary pl-4">
-                  <p className="font-medium text-foreground">结构优于内容</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    再好的内容，如果架构不对，搜索引擎也难以理解
-                  </p>
-                </div>
+          <div className="space-y-8 text-lg leading-relaxed text-foreground">
+            <p>
+              本站由我个人独立运营，
+              专注于 SEO-first 网站结构设计、长期搜索增长以及 AI-ready 信息架构。
+            </p>
 
-                <div className="border-l-2 border-border pl-4">
-                  <p className="font-medium text-foreground">长期优于短期</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    SEO是复利游戏，三个月见效的承诺通常意味着风险
-                  </p>
-                </div>
+            <p>
+              我主要为制造业与品牌型企业提供网站建设、SEO 顾问及长期运营支持，
+              关注的不是短期排名或流量技巧，而是网站是否具备长期、可持续获客的能力。
+            </p>
 
-                <div className="border-l-2 border-border pl-4">
-                  <p className="font-medium text-foreground">系统优于技巧</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    可复用的方法比一次性的优化更有价值
-                  </p>
-                </div>
-              </div>
-            </div>
+            <p>
+              本站所展示的案例、文章与方法论，
+              均来源于真实项目实践与持续研究，
+              目的是帮助企业理解搜索环境的变化，并做出更理性的长期决策。
+            </p>
+
+            <p>
+              如果你认同这种以结构和时间为核心的增长方式，
+              欢迎进一步沟通合作的可能性。
+            </p>
           </div>
         </div>
       </div>

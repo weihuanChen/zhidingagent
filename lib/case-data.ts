@@ -22,6 +22,16 @@ export interface CaseDetail extends CaseListItem {
 // 案例列表数据（用于列表页）
 export const caseList: CaseListItem[] = [
   {
+    id: "7",
+    slug: "seo-first-architecture",
+    title: "SEO-first 信息架构落地",
+    type: "demo",
+    industry: "网站建设",
+    problem: "如何把 SEO-first 理念真正落到网站结构里，而不是事后补救？",
+    insight: "从搜索需求反推信息架构：先建主题树和URL模式，再落内容和内部链接，确保搜索和用户都能读懂。",
+    tags: ["SEO-first", "信息架构", "站点结构"],
+  },
+  {
     id: "1",
     slug: "manufacturing-product-architecture",
     title: "制造业产品架构实践",
@@ -85,6 +95,42 @@ export const caseList: CaseListItem[] = [
 
 // 案例详情数据（用于详情页）
 export const caseDetails: CaseDetail[] = [
+  {
+    id: "7",
+    slug: "seo-first-architecture",
+    title: "SEO-first 信息架构落地",
+    type: "demo",
+    industry: "网站建设",
+    problem: "如何把 SEO-first 理念真正落到网站结构里，而不是事后补救？",
+    insight: "从搜索需求反推信息架构：先建主题树和URL模式，再落内容和内部链接，确保搜索和用户都能读懂。",
+    tags: ["SEO-first", "信息架构", "站点结构"],
+    background: `这是一个完全以 SEO-first 思路搭建的自研站点。目标是让网站从第一天起就具备清晰的主题骨架，而不是先做页面再补救。`,
+    challenge: `主要挑战：
+1. 没有现成的信息架构，需要从0到1建立主题层级
+2. 同时兼顾用户导航、搜索意图和业务转化路径
+3. 需要让搜索引擎快速理解新站点的主题权重分布`,
+    approach: `采用"搜索意图反推结构"的方法：
+1. 需求调研：围绕目标用户的问题和搜索词，整理主题树（主题>子主题>问题/解决方案）
+2. URL模式：确定 /case/、/insights/、/services/ 的固定模式，并为主题和问题预留可扩展路径
+3. 模板化布局：为不同内容类型（案例、洞察、服务）定义固定的语义区块和标题层级
+4. 链接策略：主导航覆盖主题层，侧栏/页内导航覆盖子主题，正文穿插问题-解决方案-案例的互链
+5. 元数据：在规划阶段就写好title/description模式，保证每个节点的意图明确`,
+    decisions: `1. 结构先行 vs 页面先行
+   - 权衡：结构先行需要更多前期规划，但能避免后期返工
+   - 决策：先产出主题树和URL规范，再进入视觉与开发
+
+2. URL深度
+   - 权衡：深层级更语义化 vs 扁平更易管理
+   - 决策：保持两层深度，使用清晰的slug命名，避免日期/ID型路径
+
+3. 链接布局
+   - 权衡：过度互链可能显得刻意 vs 链接不足导致权重分散
+   - 决策：核心页面使用模块化的"相关案例/相关洞察"区块，基于主题匹配自动填充`,
+    outcomes: `1. 新站上线后两周内核心主题被完整索引
+2. 案例和洞察之间形成稳定的语义互链，提升长尾覆盖
+3. 后续新增内容只需挂载到既定主题节点，结构稳定、维护成本低
+4. 业务侧能直观看到"主题>页面"的映射，方便持续扩展`,
+  },
   {
     id: "1",
     slug: "manufacturing-product-architecture",
@@ -286,4 +332,3 @@ export const caseDetails: CaseDetail[] = [
 4. 维护成本降低`,
   },
 ]
-

@@ -1,36 +1,30 @@
 "use client"
 
-import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 
 export type CaseCategory = "all" | "practice" | "client" | "demo"
 
-const categories = [
-  { id: "all" as CaseCategory, label: "全部案例", count: 0 },
-  { id: "practice" as CaseCategory, label: "个人实践项目", count: 0 },
-  { id: "client" as CaseCategory, label: "匿名客户项目", count: 0 },
-  { id: "demo" as CaseCategory, label: "SEO结构演示", count: 0 },
-]
+export interface CaseCategoryItem {
+  id: CaseCategory
+  label: string
+}
 
 interface CaseCategoriesProps {
   activeCategory: CaseCategory
   onCategoryChange: (category: CaseCategory) => void
   categoryCounts: Record<CaseCategory, number>
+  categories: CaseCategoryItem[]
 }
 
 export function CaseCategories({
   activeCategory,
   onCategoryChange,
   categoryCounts,
+  categories,
 }: CaseCategoriesProps) {
-  const categoriesWithCounts = categories.map((cat) => ({
-    ...cat,
-    count: categoryCounts[cat.id] || 0,
-  }))
-
   return (
     <div className="flex flex-wrap gap-3 border-b border-border pb-6">
-      {categoriesWithCounts.map((category) => (
+      {categories.map((category) => (
         <button
           key={category.id}
           onClick={() => onCategoryChange(category.id)}
@@ -41,14 +35,14 @@ export function CaseCategories({
           }`}
         >
           {category.label}
-          {category.count > 0 && (
+          {categoryCounts[category.id] > 0 && (
             <Badge
               variant="secondary"
               className={`ml-1 rounded-full text-xs ${
                 activeCategory === category.id ? "bg-primary/20 text-primary" : ""
               }`}
             >
-              {category.count}
+              {categoryCounts[category.id]}
             </Badge>
           )}
         </button>
@@ -56,4 +50,3 @@ export function CaseCategories({
     </div>
   )
 }
-

@@ -1,6 +1,7 @@
 
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -177,6 +178,17 @@ export function CollaborationForm() {
                     <Button type="submit" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
                         {isSubmitting ? "发送中..." : "提交咨询"}
                     </Button>
+                    <p className="mt-4 text-sm text-muted-foreground">
+                        提交即表示你已阅读并同意
+                        <Link href="/privacy" className="text-primary underline-offset-4 hover:underline">
+                            《隐私政策》
+                        </Link>
+                        和
+                        <Link href="/terms" className="text-primary underline-offset-4 hover:underline">
+                            《服务条款》
+                        </Link>
+                        。
+                    </p>
                 </div>
             </form>
         </section>

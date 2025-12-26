@@ -2,14 +2,17 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { AboutHero } from "@/components/about/about-hero"
-import { ThinkingEvolution } from "@/components/about/thinking-evolution"
-import { WorkingPrinciples } from "@/components/about/working-principles"
 import { FitStatement } from "@/components/about/fit-statement"
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zhidingagent.com"
+
 export const metadata: Metadata = {
-  title: "关于 | 知定智能 - SEO架构顾问",
+  title: "关于我们 | 知定智能 - SEO架构顾问",
   description:
-    "了解知定智能的方法论演进：从网站建设到SEO架构，从搜索优化到AI就绪。专注制造业与品牌客户的长期有机增长。",
+    "专注于 SEO-first 网站结构设计、长期搜索增长以及 AI-ready 信息架构。为制造业与品牌型企业提供网站建设、SEO 顾问及长期运营支持。",
+  alternates: {
+    canonical: `${baseUrl}/about`,
+  },
 }
 
 export default function AboutPage() {
@@ -18,8 +21,6 @@ export default function AboutPage() {
       <Header />
       <main className="min-h-screen">
         <AboutHero />
-        <ThinkingEvolution />
-        <WorkingPrinciples />
         <FitStatement />
       </main>
       <Footer />

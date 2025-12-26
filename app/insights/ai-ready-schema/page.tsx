@@ -14,10 +14,10 @@ AI 搜索依赖可解析的语义信号；Schema.org 是最稳健的载体。重
 - SERP 富摘要和多模态结果（图片、视频、PDF）都依赖标记。
 
 ## 优先类型与映射
-- **Article**：博客/知识库。填充 `headline`、`datePublished`、`author`、`image`、`keywords`。  
-- **Product / Service**：核心产品与方案；务必给 `sku`/内部编号、`offers.price`、`brand`。  
+- **Article**：博客/知识库。填充 \`headline\`、\`datePublished\`、\`author\`、\`image\`、\`keywords\`。
+- **Product / Service**：核心产品与方案；务必给 \`sku\`/内部编号、\`offers.price\`、\`brand\`。
 - **FAQPage**：整理一问一答，避免长段落。  
-- **HowTo**：安装/操作步骤；用 `step` + `tool`/`supply`。  
+- **HowTo**：安装/操作步骤；用 \`step\` + \`tool\`/\`supply\`。
 - **BreadcrumbList**：保持 URL 分层与信息架构一致。
 
 ## JSON-LD 示例（B2B 产品）
@@ -41,9 +41,9 @@ AI 搜索依赖可解析的语义信号；Schema.org 是最稳健的载体。重
 
 ## 实施清单
 1) 只标记真实可见的内容，字段从 CMS/产品库读取。  
-2) 为主要页面添加 `@id`，在 FAQ/产品/案例间复用，形成实体图。  
-3) 图片用可访问 URL，包含尺寸与 `contentUrl`。  
-4) 每次发布后跑富结果测试；404/301 后及时更新 `@id` 和 canonical。  
+2) 为主要页面添加 \`@id\`，在 FAQ/产品/案例间复用，形成实体图。
+3) 图片用可访问 URL，包含尺寸与 \`contentUrl\`。
+4) 每次发布后跑富结果测试；404/301 后及时更新 \`@id\` 和 canonical。
 5) 按信息架构批量覆盖（首页→类别→详情→FAQ），避免零散。
 
 ## 监控与回归
