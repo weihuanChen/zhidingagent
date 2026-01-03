@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { unstable_noStore as noStore } from "next/cache"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CaseHero } from "@/components/case/case-hero"
@@ -6,16 +7,17 @@ import { CaseListSection } from "@/components/case/case-list-section"
 import { CaseClosing } from "@/components/case/case-closing"
 import type { Case, CaseType } from "@/components/case/case-card"
 import type { CaseCategoryItem } from "@/components/case/case-categories"
-import { caseList } from "@/lib/case-data"
 import type { BlogPost } from "@/lib/types"
 import { getPostsByCategoryFromCMS, getTagsByIdsFromCMS } from "@/lib/cms-blog"
 import { SITE_ID } from "@/lib/directus"
 
 export const revalidate = 3600
+export const dynamic = "force-dynamic"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zhidingagent.com"
 
 export async function generateMetadata(): Promise<Metadata> {
+  noStore()
   const { getPostsByCategoryFromCMS } = await import("@/lib/cms-blog")
   const { SITE_ID } = await import("@/lib/directus")
   const casePosts = await getPostsByCategoryFromCMS("case", "zh", SITE_ID)
@@ -97,18 +99,16 @@ const fetchCaseList = async (): Promise<Case[]> => {
   try {
     const posts = await getPostsByCategoryFromCMS("case", "zh", SITE_ID)
     const mapped = posts.map(mapPostToCase).filter((item) => Boolean(item.slug))
-    if (mapped.length) return mapped
+    return mapped
   } catch (error) {
     console.error("[case-page] Failed to fetch cases from CMS", error)
   }
 
-  return caseList.map((item) => ({
-    ...item,
-    categories: [item.type],
-  }))
+  return []
 }
 
 export default async function CasePage() {
+  noStore()
   const cases = await fetchCaseList()
   const categoryTags = await getTagsByIdsFromCMS([143, 144, 145], "zh")
 

@@ -5,6 +5,7 @@
     "title": "制造业产品架构实践",
     "type": "practice",
     "industry": "精密制造",
+    "sub_industry": "机械零部件",
     "problem": "如何为200+产品SKU建立清晰的SEO结构，让每个产品都能被搜索引擎理解？",
     "insight": "采用层级化产品分类 + 属性组合页面，通过URL结构和内部链接建立语义关联。",
     "tags": ["产品架构", "SKU管理"]
@@ -15,6 +16,7 @@
     "title": "B2B询盘系统的SEO设计",
     "type": "client",
     "industry": "工业设备",
+    "sub_industry": "工业自动化设备",
     "problem": "B2B客户需要技术文档和产品信息，但传统网站结构无法有效承载长尾查询。",
     "insight": "将技术文档结构化，建立问题-解决方案-产品的三层关联，配合结构化数据提升理解度。",
     "tags": ["B2B", "技术文档"]
@@ -25,6 +27,7 @@
     "title": "多语言站点的统一架构",
     "type": "practice",
     "industry": "出口制造",
+    "sub_industry": "跨境贸易",
     "problem": "中英文站点如何保持结构一致性，同时满足不同市场的搜索习惯？",
     "insight": "使用统一的URL结构模式，通过hreflang和内容策略差异，而非结构差异来区分市场。",
     "tags": ["多语言", "国际化"]
@@ -35,6 +38,7 @@
     "title": "内容矩阵的SEO结构",
     "type": "client",
     "industry": "消费品",
+    "sub_industry": "快消品",
     "problem": "内容营销需要大量页面，但如何避免内容孤岛和关键词竞争？",
     "insight": "建立主题集群（Topic Cluster）结构，核心页面 + 支持页面的层级关系，通过内部链接传递权重。",
     "tags": ["内容营销", "主题集群"]
@@ -45,19 +49,20 @@
     "title": "AI就绪的结构化数据设计",
     "type": "demo",
     "industry": "通用",
+    "sub_industry": "跨行业平台",
     "problem": "如何让网站结构既满足搜索引擎，又便于AI工具理解和提取？",
     "insight": "采用Schema.org标准，配合清晰的HTML语义化，建立机器可读的内容层次。",
     "tags": ["结构化数据", "AI就绪"]
   },
   {
     "id": "6",
-    "slug": "long-tail-content-system",
+    "slug": "structured-system-for-long-tail-content",
     "title": "长尾内容的结构化系统",
     "type": "practice",
     "industry": "技术服务",
+    "sub_industry": "技术咨询",
     "problem": "如何系统化地覆盖长尾关键词，而不陷入内容生产的无限循环？",
     "insight": "建立内容模板系统，通过参数化生成页面，确保结构一致性和可维护性。",
     "tags": ["长尾关键词", "内容系统"]
   }
 ]
-

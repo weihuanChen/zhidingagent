@@ -83,7 +83,7 @@ export const caseList: CaseListItem[] = [
   },
   {
     id: "6",
-    slug: "long-tail-content-system",
+    slug: "structured-system-for-long-tail-content",
     title: "长尾内容的结构化系统",
     type: "practice",
     industry: "技术服务",
@@ -302,7 +302,7 @@ export const caseDetails: CaseDetail[] = [
   },
   {
     id: "6",
-    slug: "long-tail-content-system",
+    slug: "structured-system-for-long-tail-content",
     title: "长尾内容的结构化系统",
     type: "practice",
     industry: "技术服务",

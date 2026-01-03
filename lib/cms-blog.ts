@@ -1,4 +1,5 @@
 import { readItems } from "@directus/sdk"
+import { unstable_noStore as noStore } from "next/cache"
 import { directus, SITE_ID, type DirectusPost, type PostTranslation, type Tag } from "./directus"
 import type { BlogPost, Locale, TagInfo } from "./types"
 
@@ -146,6 +147,7 @@ const getPostsFromCMS = async (
   siteId: number,
   categorySlug?: string
 ): Promise<BlogPost[]> => {
+  noStore()
   const posts = await directus.request(
     readItems("posts", {
       fields: postFields,
@@ -213,6 +215,7 @@ export const getPostBySlugFromCMS = async (
   siteId: number = SITE_ID,
   categorySlug?: string
 ): Promise<BlogPost | null> => {
+  noStore()
   const posts = await directus.request(
     readItems("posts", {
       fields: postFields,
@@ -245,6 +248,7 @@ export const getCategoriesForSite = async (siteId: number = SITE_ID) =>
   )
 
 export const getTagsByIdsFromCMS = async (ids: number[], locale: Locale = "zh"): Promise<Tag[]> => {
+  noStore()
   if (!ids.length) return []
 
   const [tags, translations] = await Promise.all([

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { unstable_noStore as noStore } from "next/cache"
 import { notFound } from "next/navigation"
-import { cache } from "react"
 import { ArrowLeft } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -11,10 +11,10 @@ import { MarkdownContent } from "@/components/markdown/markdown-content"
 import { getPostBySlugFromCMS } from "@/lib/cms-blog"
 import { SITE_ID } from "@/lib/directus"
 import type { CaseDetail, CaseType } from "@/lib/case-data"
-import { caseDetails } from "@/lib/case-data"
 import type { BlogPost } from "@/lib/types"
 
 export const revalidate = 3600
+export const dynamic = "force-dynamic"
 
 const fallbackProblem =
   "本站作为 SEO-first 理念的起点，它的设计是如何做的？我又是如何让搜索引擎理解我的网站？"
@@ -82,32 +82,31 @@ const mapPostToCaseDetail = (post: BlogPost): CaseDetailData => {
   }
 }
 
-const getCasePost = cache(async (slug: string): Promise<BlogPost | null> =>
+const getCasePost = async (slug: string): Promise<BlogPost | null> =>
   getPostBySlugFromCMS(slug, "zh", SITE_ID, "case")
-)
 
 type CaseDetailPageProps = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: CaseDetailPageProps): Promise<Metadata> {
-  const post = await getCasePost(params.slug)
-  const fallback = caseDetails.find((c) => c.slug === params.slug)
-  const data = post ? mapPostToCaseDetail(post) : fallback
+  noStore()
+  const { slug } = await params
+  const post = await getCasePost(slug)
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zhidingagent.com"
 
-  if (!data) {
+  if (!post) {
     return {
       title: "案例未找到 | 知定智能",
       robots: "noindex,follow",
     }
   }
 
-  const canonical = `${baseUrl}/case/${params.slug}`
+  const canonical = `${baseUrl}/case/${slug}`
 
   return {
-    title: `${data.title} | 案例研究 | 知定智能`,
-    description: data.insight,
+    title: `${post.title} | 案例研究 | 知定智能`,
+    description: post.description,
     alternates: {
       canonical,
     },
@@ -127,17 +126,19 @@ const typeColors: Record<string, string> = {
 }
 
 export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
-  const post = await getCasePost(params.slug)
-  const caseItem = post ? mapPostToCaseDetail(post) : caseDetails.find((c) => c.slug === params.slug)
+  noStore()
+  const { slug } = await params
+  const post = await getCasePost(slug)
 
-  if (!caseItem) {
+  if (!post) {
     notFound()
   }
 
-  const content = post?.content || post?.description || ""
+  const caseItem = mapPostToCaseDetail(post)
+  const content = caseItem.content || ""
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zhidingagent.com"
-  const caseUrl = `${baseUrl}/case/${params.slug}`
+  const caseUrl = `${baseUrl}/case/${slug}`
 
   const articleJsonLd = {
     "@context": "https://schema.org",
