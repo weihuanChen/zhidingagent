@@ -205,110 +205,262 @@ export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Header />
-      <main className="min-h-screen">
-        <section className="border-b border-border bg-background py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-6">
+      <main className="min-h-screen relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="fixed inset-0 pointer-events-none -z-10">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+        </div>
+
+        {/* Hero Section - Magazine Style */}
+        <section className="relative min-h-[70vh] flex items-center border-b border-border/40">
+          <div className="mx-auto w-full max-w-7xl px-6 py-20 md:py-32">
+            {/* Back link - subtle */}
             <Link
               href="/case"
-              className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground/70 hover:text-foreground transition-all duration-300 mb-16 group"
             >
-              <ArrowLeft className="h-4 w-4" />
-              返回案例列表
+              <ArrowLeft className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" />
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">案例研究</span>
             </Link>
 
-            <div className="mb-6 flex items-center gap-2">
-              <Badge
-                variant="outline"
-                className={`rounded-md text-xs ${typeColors[caseItem.type]}`}
-              >
-                {typeLabels[caseItem.type]}
-              </Badge>
-              {caseItem.tags?.map((tag) => (
-                <Badge key={tag} variant="secondary" className="rounded-md text-xs">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+              {/* Main title - Large and bold */}
+              <div className="lg:col-span-8 lg:col-start-1">
+                <div className="space-y-8">
+                  {/* Type badge - Minimal */}
+                  <div className="inline-flex items-center gap-3">
+                    <span className={`px-3 py-1 text-[10px] tracking-[0.2em] uppercase font-medium border ${typeColors[caseItem.type]} rounded-full`}>
+                      {typeLabels[caseItem.type]}
+                    </span>
+                    {caseItem.tags?.slice(0, 2).map((tag) => (
+                      <span key={tag} className="text-xs text-muted-foreground/60 tracking-wide">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-            <h1 className="mb-4 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-              {caseItem.title}
-            </h1>
-            <p className="text-lg text-muted-foreground">{caseItem.industry}</p>
+                  {/* Massive headline */}
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground">
+                    {caseItem.title}
+                  </h1>
+
+                  {/* Subtitle with decorative line */}
+                  <div className="flex items-center gap-6 pt-4">
+                    <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+                    <p className="text-sm md:text-base text-muted-foreground tracking-wide font-medium">
+                      {caseItem.industry}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Problem statement - Floating card */}
+              <div className="lg:col-span-4 lg:col-start-9 lg:row-start-1">
+                <div className="relative">
+                  {/* Decorative number */}
+                  <div className="absolute -top-6 -left-6 text-8xl font-bold text-primary/5 select-none">
+                    01
+                  </div>
+
+                  <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-500">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                      <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground">
+                        核心问题
+                      </h3>
+                    </div>
+                    <p className="text-lg leading-relaxed text-foreground font-medium">
+                      {caseItem.problem}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="border-b border-border bg-background py-16 md:py-20">
+        {/* Insight Section - Dramatic presentation */}
+        <section className="relative py-32 md:py-40 border-b border-border/40">
+          <div className="mx-auto max-w-5xl px-6">
+            <div className="relative">
+              {/* Large quote mark */}
+              <div className="absolute -top-12 -left-8 text-[12rem] leading-none font-serif text-primary/10 select-none">
+                "
+              </div>
+
+              <div className="relative z-10 text-center space-y-12">
+                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary border border-primary/20">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary-foreground" />
+                  <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary-foreground">
+                    关键洞察
+                  </span>
+                </div>
+
+                <blockquote className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-relaxed text-primary max-w-4xl mx-auto">
+                  {caseItem.insight}
+                </blockquote>
+
+                <div className="flex items-center justify-center gap-4 pt-8">
+                  <div className="h-px w-24 bg-border" />
+                  <div className="w-2 h-2 rounded-full border-2 border-primary/30" />
+                  <div className="h-px w-24 bg-border" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Content Section - Enhanced readability */}
+        <section className="relative py-20 md:py-32">
           <div className="mx-auto max-w-4xl px-6">
-            <div className="prose prose-slate max-w-none dark:prose-invert">
-              <div className="mb-12 rounded-lg border border-border bg-card p-6">
-                <h2 className="mb-3 text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                  核心问题
-                </h2>
-                <p className="text-lg leading-relaxed text-foreground">{caseItem.problem}</p>
-              </div>
-
-              <div className="mb-12 rounded-lg border-l-4 border-primary bg-primary/5 p-6">
-                <h2 className="mb-3 text-sm font-medium uppercase tracking-wider text-primary">
-                  关键洞察
-                </h2>
-                <p className="text-lg leading-relaxed text-foreground">{caseItem.insight}</p>
-              </div>
-
-              {content ? (
+            {content ? (
+              <div className="prose prose-lg prose-slate max-w-none dark:prose-invert
+                prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
+                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-b prose-h2:border-border/40 prose-h2:pb-4
+                prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
+                prose-p:leading-relaxed prose-p:text-muted-foreground/90 prose-p:text-lg
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:underline-offset-4 prose-a:decoration-2 prose-a:decoration-primary/30 hover:prose-a:decoration-primary/60
+                prose-strong:text-foreground prose-strong:font-semibold
+                prose-code:text-foreground prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:font-mono
+                prose-pre:bg-card prose-pre:border prose-pre:border-border
+                prose-img:rounded-xl prose-img:shadow-lg
+                prose-ul:list-disc prose-ul:space-y-3 prose-ul:pl-6
+                prose-ol:list-decimal prose-ol:space-y-3 prose-ol:pl-6
+                prose-li:text-muted-foreground/90
+                prose-blockquote:border-l-4 prose-blockquote:border-primary/30 prose-blockquote:bg-primary/5 prose-blockquote:pl-6 prose-blockquote:py-4 prose-blockquote:rounded-r-lg
+                prose-hr:border-border/40 prose-hr:my-16
+              ">
                 <MarkdownContent content={content} />
-              ) : (
-                <>
-                  <div className="mb-12">
-                    <h2 className="mb-4 text-xl font-semibold text-foreground">背景和上下文</h2>
-                    <div className="whitespace-pre-line leading-relaxed text-muted-foreground">
+              </div>
+            ) : (
+              <div className="space-y-24">
+                {/* Background */}
+                <div className="group">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="text-6xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                      02
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">
+                      背景和上下文
+                    </h2>
+                  </div>
+                  <div className="prose prose-lg max-w-none dark:prose-invert pl-0 md:pl-24">
+                    <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                       {caseItem.background}
-                    </div>
+                    </p>
                   </div>
+                </div>
 
-                  <div className="mb-12">
-                    <h2 className="mb-4 text-xl font-semibold text-foreground">结构挑战</h2>
-                    <div className="whitespace-pre-line leading-relaxed text-muted-foreground">
+                {/* Challenge */}
+                <div className="group">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="text-6xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                      03
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">
+                      结构挑战
+                    </h2>
+                  </div>
+                  <div className="prose prose-lg max-w-none dark:prose-invert pl-0 md:pl-24">
+                    <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                       {caseItem.challenge}
-                    </div>
+                    </p>
                   </div>
+                </div>
 
-                  <div className="mb-12">
-                    <h2 className="mb-4 text-xl font-semibold text-foreground">架构设计方法</h2>
-                    <div className="whitespace-pre-line leading-relaxed text-muted-foreground">
+                {/* Approach */}
+                <div className="group">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="text-6xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                      04
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">
+                      架构设计方法
+                    </h2>
+                  </div>
+                  <div className="prose prose-lg max-w-none dark:prose-invert pl-0 md:pl-24">
+                    <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                       {caseItem.approach}
-                    </div>
+                    </p>
                   </div>
+                </div>
 
-                  <div className="mb-12">
-                    <h2 className="mb-4 text-xl font-semibold text-foreground">关键决策和权衡</h2>
-                    <div className="whitespace-pre-line leading-relaxed text-muted-foreground">
+                {/* Decisions */}
+                <div className="group">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="text-6xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                      05
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">
+                      关键决策和权衡
+                    </h2>
+                  </div>
+                  <div className="prose prose-lg max-w-none dark:prose-invert pl-0 md:pl-24">
+                    <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                       {caseItem.decisions}
-                    </div>
+                    </p>
                   </div>
+                </div>
 
-                  <div className="mb-12 rounded-lg border border-border bg-card p-6">
-                    <h2 className="mb-4 text-xl font-semibold text-foreground">结果与学习</h2>
-                    <div className="whitespace-pre-line leading-relaxed text-muted-foreground">
-                      {caseItem.outcomes}
+                {/* Outcomes - Highlighted */}
+                <div className="relative">
+                  <div className="absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/50 via-primary to-primary/50 rounded-full" />
+                  <div className="group pl-8">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="text-6xl font-bold text-primary/20 group-hover:text-primary/30 transition-colors duration-500">
+                        06
+                      </div>
+                      <h2 className="text-3xl font-bold tracking-tight text-foreground">
+                        结果与学习
+                      </h2>
+                    </div>
+                    <div className="prose prose-lg max-w-none dark:prose-invert pl-0 md:pl-24">
+                      <p className="text-lg leading-relaxed text-foreground whitespace-pre-line font-medium">
+                        {caseItem.outcomes}
+                      </p>
                     </div>
                   </div>
-                </>
-              )}
-            </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        <section className="border-b border-border bg-background py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-6 text-center">
-            <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
-              想讨论如何应用到你的网站？
-            </h2>
-            <p className="mb-8 text-muted-foreground">
-              这些案例背后的思考模式可以应用到不同行业和场景。
-            </p>
-            <Button size="lg" className="rounded-lg" asChild>
-              <Link href="/contact">开始咨询</Link>
-            </Button>
+        {/* CTA Section - Bold and engaging */}
+        <section className="relative py-32 md:py-40 border-t border-border/40 overflow-hidden">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+
+          <div className="relative mx-auto max-w-5xl px-6 text-center">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary border border-primary/20">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-pulse" />
+                <span className="text-xs font-semibold tracking-[0.2em] uppercase text-primary-foreground">
+                  下一步
+                </span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground max-w-3xl mx-auto">
+                想讨论如何应用到你的网站？
+              </h2>
+
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                这些案例背后的思考模式可以应用到不同行业和场景。让我们一起探索如何将这些经验转化为你的竞争优势。
+              </p>
+
+              <div className="pt-8">
+                <Button
+                  size="lg"
+                  className="rounded-full px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  asChild
+                >
+                  <Link href="/contact">
+                    开始咨询
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
       </main>
