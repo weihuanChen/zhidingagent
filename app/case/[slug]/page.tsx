@@ -218,9 +218,10 @@ export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
             {/* Back link - subtle */}
             <Link
               href="/case"
-              className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground/70 hover:text-foreground transition-all duration-300 mb-16 group"
+              className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-foreground hover:text-primary transition-all duration-300 mb-16 group"
+              style={{ opacity: 1 }}
             >
-              <ArrowLeft className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" />
+              <ArrowLeft className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" style={{ opacity: 0.7 }} />
               <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">案例研究</span>
             </Link>
 

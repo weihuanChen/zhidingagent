@@ -6,7 +6,8 @@
     "category": "SEO 基础与策略",
     "categoryId": "seo-fundamentals",
     "date": "2024-01-15",
-    "href": "/insights/seo-fundamentals-1"
+    "href": "/insights/seo-fundamentals-1",
+    "sub_industry": "通用行业 - 适用于所有需要建立网站和在线业务的企业，包括制造业、服务业、零售业、科技公司、咨询公司、教育机构、医疗健康、金融服务、房地产、电商平台等"
   },
   {
     "id": "website-architecture-1",
@@ -15,7 +16,8 @@
     "category": "网站架构与结构",
     "categoryId": "website-architecture",
     "date": "2024-01-10",
-    "href": "/insights/website-architecture-1"
+    "href": "/insights/website-architecture-1",
+    "sub_industry": "通用行业 - 适用于所有需要新建网站或重构现有网站的企业，特别适合正在规划新网站的企业、准备进行网站改版的公司、以及需要建立多语言或多地区网站架构的国际化企业"
   },
   {
     "id": "manufacturing-seo-1",
@@ -24,7 +26,8 @@
     "category": "制造业与品牌 SEO",
     "categoryId": "manufacturing-brand-seo",
     "date": "2024-01-05",
-    "href": "/insights/manufacturing-seo-1"
+    "href": "/insights/manufacturing-seo-1",
+    "sub_industry": "B2B 制造业 - 包括工业设备制造、机械制造、电子元器件制造、汽车零部件制造、化工产品制造、建筑材料制造、金属加工、精密仪器制造、自动化设备制造、新能源设备制造等需要展示产品技术参数和建立 B2B 获客路径的制造企业"
   },
   {
     "id": "ai-ready-1",
@@ -33,7 +36,8 @@
     "category": "AI 就绪搜索与 GEO",
     "categoryId": "ai-ready-search",
     "date": "2024-01-01",
-    "href": "/insights/ai-ready-1"
+    "href": "/insights/ai-ready-1",
+    "sub_industry": "通用行业 - 适用于所有希望在未来 AI 搜索环境中保持竞争力的企业，特别适合科技公司、内容平台、知识服务企业、在线教育、SaaS 公司、咨询公司、以及任何依赖搜索流量获取客户的企业"
   },
   {
     "id": "seo-fundamentals-2",
@@ -42,7 +46,8 @@
     "category": "SEO 基础与策略",
     "categoryId": "seo-fundamentals",
     "date": "2024-01-20",
-    "href": "/insights/seo-fundamentals-2"
+    "href": "/insights/seo-fundamentals-2",
+    "sub_industry": "通用行业 - 适用于所有需要通过内容营销和 SEO 获取流量的企业，包括电商平台、在线服务、内容媒体、教育培训、咨询服务、SaaS 公司、本地服务、旅游行业、美食餐饮、时尚零售等依赖搜索流量的行业"
   },
   {
     "id": "website-architecture-2",
@@ -51,7 +56,8 @@
     "category": "网站架构与结构",
     "categoryId": "website-architecture",
     "date": "2024-01-18",
-    "href": "/insights/website-architecture-2"
+    "href": "/insights/website-architecture-2",
+    "sub_industry": "通用行业 - 适用于所有需要建立清晰信息架构的网站，特别适合内容丰富的网站（如新闻媒体、博客平台、知识库）、电商网站（需要清晰的分类和产品 URL）、企业官网（需要多层级内容组织）、以及多语言/多地区网站"
   },
   {
     "id": "manufacturing-seo-2",
@@ -60,7 +66,8 @@
     "category": "制造业与品牌 SEO",
     "categoryId": "manufacturing-brand-seo",
     "date": "2024-01-12",
-    "href": "/insights/manufacturing-seo-2"
+    "href": "/insights/manufacturing-seo-2",
+    "sub_industry": "B2B 制造业 - 包括工业自动化设备制造、精密机械制造、电子制造服务（EMS）、汽车零部件制造、化工产品制造、新材料制造、医疗器械制造、航空航天零部件制造、能源设备制造、以及需要展示技术实力和应用案例的 B2B 制造企业"
   },
   {
     "id": "ai-ready-schema",
@@ -69,7 +76,8 @@
     "category": "AI 就绪搜索与 GEO",
     "categoryId": "ai-ready-search",
     "date": "2024-01-08",
-    "href": "/insights/ai-ready-schema"
+    "href": "/insights/ai-ready-schema",
+    "sub_industry": "通用行业 - 适用于所有需要让 AI 和搜索引擎更好理解其内容的企业，特别适合电商平台（产品信息）、本地服务（商家信息、评价）、内容媒体（文章、视频）、在线教育（课程信息）、活动平台（事件信息）、企业官网（组织信息）、以及 SaaS 公司（软件产品信息）"
   },
   {
     "id": "seo-fundamentals-3",
@@ -78,7 +86,8 @@
     "category": "SEO 基础与策略",
     "categoryId": "seo-fundamentals",
     "date": "2024-01-03",
-    "href": "/insights/seo-fundamentals-3"
+    "href": "/insights/seo-fundamentals-3",
+    "sub_industry": "通用行业 - 适用于所有需要创建 SEO 友好内容的企业，包括内容营销驱动的公司、博客平台、在线教育、知识服务、咨询公司、SaaS 公司、电商平台（产品描述、购买指南）、本地服务（服务介绍）、医疗健康（健康科普）、以及任何依赖内容获取搜索流量的行业"
   },
   {
     "id": "website-architecture-3",
@@ -87,7 +96,8 @@
     "category": "网站架构与结构",
     "categoryId": "website-architecture",
     "date": "2023-12-28",
-    "href": "/insights/website-architecture-3"
+    "href": "/insights/website-architecture-3",
+    "sub_industry": "通用行业 - 适用于所有拥有大量内容页面的网站，特别适合内容媒体（新闻、博客、知识库）、电商平台（产品分类和关联推荐）、在线教育（课程体系）、企业官网（服务介绍、案例展示）、知识库平台、以及需要建立内容关联性的多页面网站"
   }
 ]
 
